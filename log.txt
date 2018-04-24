@@ -1,0 +1,70 @@
+THISSS : train_data/*/*.png
+START
+(1, 64, 64, 32)
+(1, 64, 64, 64)
+(1, 64, 64, 128)
+(1, 15)
+(1,)
+()
+
+this TensorFlow binary was not compiled to use: AVX AVX2
+Traceback (most recent call last):
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\client\session.py", line 1323, in _do_call
+    return fn(*args)
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\client\session.py", line 1302, in _run_fn
+    status, run_metadata)
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\framework\errors_impl.py", line 473, in __exit__
+    c_api.TF_GetCode(self.status.status))
+tensorflow.python.framework.errors_impl.OutOfRangeError: RandomShuffleQueue '_0_shuffle_batch/random_shuffle_queue' is closed and has insufficient elements (requested 1, current size 0)
+         [[Node: shuffle_batch = QueueDequeueManyV2[component_types=[DT_FLOAT, DT_INT64], timeout_ms=-1, _device="/job:localhost/replica:0/task:0/device:CPU:0"](shuffle_batch/random_shuffle_queue, shuffle_batch/n)]]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "train_folder.py", line 106, in <module>
+    tf.app.run()
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\platform\app.py", line 48, in run
+    _sys.exit(main(_sys.argv[:1] + flags_passthrough))
+  File "train_folder.py", line 98, in main
+    train(TRAIN_FILE)
+  File "train_folder.py", line 79, in train
+    img=sess.run([images_batch])
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\client\session.py", line 889, in run
+    run_metadata_ptr)
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\client\session.py", line 1120, in _run
+    feed_dict_tensor, options, run_metadata)
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\client\session.py", line 1317, in _do_run
+    options, run_metadata)
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\client\session.py", line 1336, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors_impl.OutOfRangeError: RandomShuffleQueue '_0_shuffle_batch/random_shuffle_queue' is closed and has insufficient elements (requested 1, current size 0)
+         [[Node: shuffle_batch = QueueDequeueManyV2[component_types=[DT_FLOAT, DT_INT64], timeout_ms=-1, _device="/job:localhost/replica:0/task:0/device:CPU:0"](shuffle_batch/random_shuffle_queue, shuffle_batch/n)]]
+
+Caused by op 'shuffle_batch', defined at:
+  File "train_folder.py", line 106, in <module>
+    tf.app.run()
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\platform\app.py", line 48, in run
+    _sys.exit(main(_sys.argv[:1] + flags_passthrough))
+  File "train_folder.py", line 98, in main
+    train(TRAIN_FILE)
+  File "train_folder.py", line 51, in train
+    images_batch, labels_batch = creation_batch(filename_queue)
+  File "train_folder.py", line 34, in creation_batch
+    images_batch, labels_batch = tf.train.shuffle_batch([image,label],batch_size=BATCH_SIZE,capacity=5000,min_after_dequeue=1000)
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\training\input.py", line 1225, in shuffle_batch
+    name=name)
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\training\input.py", line 796, in _shuffle_batch
+    dequeued = queue.dequeue_many(batch_size, name=name)
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\ops\data_flow_ops.py", line 464, in dequeue_many
+    self._queue_ref, n=n, component_types=self._dtypes, name=name)
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\ops\gen_data_flow_ops.py", line 2417, in _queue_dequeue_many_v2
+    component_types=component_types, timeout_ms=timeout_ms, name=name)
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\framework\op_def_library.py", line 787, in _apply_op_helper
+    op_def=op_def)
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\framework\ops.py", line 2956, in create_op
+    op_def=op_def)
+  File "C:\Users\Neogeoisie\AppData\Local\Programs\Python\Python36\lib\site-packages\tensorflow\python\framework\ops.py", line 1470, in __init__
+    self._traceback = self._graph._extract_stack()  # pylint: disable=protected-access
+
+OutOfRangeError (see above for traceback): RandomShuffleQueue '_0_shuffle_batch/random_shuffle_queue' is closed and has insufficient elements (requested 1, current size 0)
+         [[Node: shuffle_batch = QueueDequeueManyV2[component_types=[DT_FLOAT, DT_INT64], timeout_ms=-1, _device="/job:localhost/replica:0/task:0/device:CPU:0"](shuffle_batch/random_shuffle_queue, shuffle_batch/n)]]
